@@ -1,14 +1,14 @@
 package main
 
 import (
-	"product/database"
-	"product/models"
 	"github.com/gin-gonic/gin"
 	"product/api/handlers"
+	"product/database"
+	"product/models"
 )
 
-func init(){
-	database.InitDB();
+func init() {
+	database.InitDB()
 }
 
 func main() {

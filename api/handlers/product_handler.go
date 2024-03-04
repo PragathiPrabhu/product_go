@@ -1,10 +1,10 @@
 package handlers
 
 import (
+	"github.com/gin-gonic/gin"
 	"net/http"
 	"product/database"
 	"product/models"
-	"github.com/gin-gonic/gin"
 )
 
 func GetProducts(context *gin.Context) {
@@ -41,22 +41,22 @@ func GetProductByID(context *gin.Context) {
 }
 
 func AddProduct(context *gin.Context) {
-    db := database.GetDB()
+	db := database.GetDB()
 
-    // Bind the JSON request body to a struct
-    var newProduct models.Product
-    if err := context.ShouldBindJSON(&newProduct); err != nil {
-        context.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
-        return
-    }
+	// Bind the JSON request body to a struct
+	var newProduct models.Product
+	if err := context.ShouldBindJSON(&newProduct); err != nil {
+		context.AbortWithStatusJSON(http.StatusBadRequest, gin.H{"error": err.Error()})
+		return
+	}
 
-    // Create the product in the database
-    if err := db.Create(&newProduct).Error; err != nil {
-        context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Failed to create product"})
-        return
-    }
+	// Create the product in the database
+	if err := db.Create(&newProduct).Error; err != nil {
+		context.AbortWithStatusJSON(http.StatusInternalServerError, gin.H{"error": "Failed to create product"})
+		return
+	}
 
-    context.IndentedJSON(http.StatusCreated, newProduct)
+	context.IndentedJSON(http.StatusCreated, newProduct)
 }
 
 func UpdateProductName(context *gin.Context) {
