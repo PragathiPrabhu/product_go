@@ -9,6 +9,8 @@ import (
 var DB *gorm.DB
 var err error
 
+ 
+
 func InitDB() {
 	dsn := "root:root@tcp(localhost:3306)/product?charset=utf8mb4&parseTime=True&loc=Local"
 	DB, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
